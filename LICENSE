@@ -1,0 +1,53 @@
+MIT License
+
+Copyright (c) 2025 FreelanceSmart Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+ADDITIONAL NOTES:
+
+1. CONTRACT TEMPLATES DISCLAIMER
+   The contract templates provided in this software are for general informational
+   purposes only and do not constitute legal advice. Users should consult with
+   qualified legal professionals before using any contracts for business purposes.
+   The authors and contributors are not responsible for any legal issues arising
+   from the use of these templates.
+
+2. AI-POWERED FEATURES
+   The AI Rate Advisor feature uses OpenAI's GPT models. Users are responsible
+   for their own OpenAI API usage and associated costs. Rate suggestions provided
+   by the AI are recommendations only and should not be considered as professional
+   financial or business advice.
+
+3. DATA PRIVACY
+   This software does not store user data. Any data processed through external
+   services (such as OpenAI) is subject to those services' privacy policies and
+   terms of service.
+
+4. CURRENCY INFORMATION
+   Default currency displays are in Canadian Dollars (CAD). Users are responsible
+   for adjusting rates and currency symbols to match their local market and legal
+   requirements.
+
+5. NO WARRANTY
+   This software is provided "as is" without warranty of any kind. Use at your
+   own risk. The authors and contributors are not liable for any damages or losses
+   arising from the use of this software.

@@ -34,7 +34,10 @@ Fully functional application with modern, aesthetic design and comprehensive fea
 ├── package.json         # Dependencies and scripts
 ├── vite.config.js       # Vite configuration with API proxy
 ├── tailwind.config.js   # Tailwind CSS configuration
-└── postcss.config.js    # PostCSS configuration
+├── postcss.config.js    # PostCSS configuration
+├── README.md            # Comprehensive project documentation
+├── LICENSE              # MIT License
+└── replit.md            # Project summary and user preferences
 ```
 
 ## Features
@@ -109,6 +112,11 @@ npm run dev
 The app runs on port 5000, with API server on port 3001.
 
 ## Recent Changes
+
+### 2025-11-25: Documentation & Licensing
+- Added comprehensive README.md for GitHub repository
+- Added MIT LICENSE file
+- Documentation written for non-technical users
 
 ### 2025-11-25: Currency Update
 - All pricing now displayed in Canadian Dollars (CAD)
