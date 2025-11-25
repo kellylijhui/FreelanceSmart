@@ -4,11 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 5000",
+    "dev": "bash start.sh",
+    "server": "node server.js",
+    "client": "vite --host 0.0.0.0 --port 5000",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "openai": "^6.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
