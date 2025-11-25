@@ -28,8 +28,9 @@ Fully functional application with modern, aesthetic design and comprehensive fea
 │   ├── App.jsx          # Main React component with all functionality
 │   ├── main.jsx         # React entry point
 │   └── index.css        # Tailwind CSS imports
-├── server.js            # Express backend for AI image analysis
-├── start.sh             # Script to run both frontend and backend
+├── server.js            # Express backend for AI image analysis (dev)
+├── production-server.js # Production server serving both frontend and API
+├── start.sh             # Script to run both frontend and backend (dev)
 ├── index.html           # HTML template
 ├── package.json         # Dependencies and scripts
 ├── vite.config.js       # Vite configuration with API proxy
@@ -106,12 +107,27 @@ Fully functional application with modern, aesthetic design and comprehensive fea
 - `OPENAI_API_KEY`: Required for AI Rate Advisor feature
 
 ## Running the Application
+
+### Development Mode
 ```bash
 npm run dev
 ```
 The app runs on port 5000, with API server on port 3001.
 
+### Production Mode
+```bash
+npm run build
+npm start
+```
+Production server runs on port 5000, serving both the built frontend and API endpoints.
+
 ## Recent Changes
+
+### 2025-11-25: Deployment Configuration
+- Created production-server.js for unified frontend and backend deployment
+- Configured deployment for Replit autoscale (Node.js, not Java)
+- Added production start script to package.json
+- Fixed deployment build and run commands
 
 ### 2025-11-25: Documentation & Licensing
 - Added comprehensive README.md for GitHub repository
