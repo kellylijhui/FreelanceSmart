@@ -5,6 +5,7 @@ const PROJECT_TYPES = [
   { value: 'copywriting', label: 'Copywriting' },
   { value: 'webdev', label: 'Web Development' },
   { value: 'consultation', label: 'Consultation' },
+  { value: 'architecture', label: 'Architecture Mockups' },
 ]
 
 function App() {

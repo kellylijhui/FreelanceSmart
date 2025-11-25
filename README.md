@@ -70,7 +70,7 @@ FreelanceSmart does it all for you:
 Create professional quotes in seconds with:
 - Real-time price calculation as you type
 - Customizable hourly rates
-- Project type selection (Logo Design, Copywriting, Web Dev, Consultation)
+- Project type selection (Logo Design, Copywriting, Web Dev, Consultation, Architecture Mockups)
 - Adjustable estimated hours (1-200 hours)
 - Visual price breakdown
 

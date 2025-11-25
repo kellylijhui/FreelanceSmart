@@ -46,7 +46,7 @@ Fully functional application with modern, aesthetic design and comprehensive fea
 ### 1. Project Setup
 - Input your name and client name
 - Set hourly rate
-- Select project type (Logo Design, Copywriting, Web Dev, Consultation)
+- Select project type (Logo Design, Copywriting, Web Dev, Consultation, Architecture Mockups)
 - Adjust estimated hours (1-200 hours slider)
 
 ### 2. Add-ons & Discounts
