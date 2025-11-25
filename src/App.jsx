@@ -1,10 +1,10 @@
 import { useState, useMemo, useRef } from 'react'
 
 const PROJECT_TYPES = [
-  { value: 'logo', label: 'Logo Design', icon: '🎨' },
-  { value: 'copywriting', label: 'Copywriting', icon: '✍️' },
-  { value: 'webdev', label: 'Web Development', icon: '💻' },
-  { value: 'consultation', label: 'Consultation', icon: '💡' },
+  { value: 'logo', label: 'Logo Design' },
+  { value: 'copywriting', label: 'Copywriting' },
+  { value: 'webdev', label: 'Web Development' },
+  { value: 'consultation', label: 'Consultation' },
 ]
 
 function App() {
@@ -63,6 +63,8 @@ function App() {
     if (friendsFamily) addons.push('Friends & Family Discount (15% off)')
 
     const addonsText = addons.length > 0 ? `\n\nThis quote includes: ${addons.join(', ')}.` : ''
+    
+    const aiRateText = aiSuggestion ? `\n\nRATE ANALYSIS:\nBased on our AI analysis of your portfolio work, we've determined an hourly rate of $${hourlyRate}/hr is appropriate. ${aiSuggestion.reasoning}` : ''
 
     return `Dear ${clientName},
 
@@ -74,7 +76,7 @@ Project Type: ${projectTypeLabel}
 Estimated Hours: ${estimatedHours} hours
 Hourly Rate: $${hourlyRate.toFixed(2)}
 
-Total Estimated Quote: $${calculations.total.toFixed(2)}${addonsText}
+Total Estimated Quote: $${calculations.total.toFixed(2)}${addonsText}${aiRateText}
 
 This quote is valid for 30 days. Please don't hesitate to reach out if you have any questions or would like to discuss the project further.
 
@@ -82,7 +84,7 @@ Looking forward to working together!
 
 Best regards,
 ${yourName}`
-  }, [projectType, projectTypeLabel, estimatedHours, hourlyRate, calculations.total, rushDelivery, includesRevisions, sourceFiles, friendsFamily, clientName, yourName])
+  }, [projectType, projectTypeLabel, estimatedHours, hourlyRate, calculations.total, rushDelivery, includesRevisions, sourceFiles, friendsFamily, clientName, yourName, aiSuggestion])
 
   const generateInvoice = () => {
     const lineItems = []
@@ -331,7 +333,9 @@ Note: This is a template contract. Please consult with a legal professional to e
             </div>
             <div className="hidden md:flex items-center gap-2 text-sm">
               <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
-                <span className="text-2xl">✨</span>
+                <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
                 <span className="text-gray-700 font-medium">AI-Powered Pricing</span>
               </div>
             </div>
@@ -344,7 +348,10 @@ Note: This is a template contract. Please consult with a legal professional to e
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/90 backdrop-blur rounded-2xl shadow-xl p-6 border border-purple-100">
               <div className="flex items-center gap-2 mb-6">
-                <span className="text-2xl">⚙️</span>
+                <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
                 <h2 className="text-xl font-semibold text-gray-800">Project Setup</h2>
               </div>
 
@@ -390,7 +397,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                   >
                     {PROJECT_TYPES.map((type) => (
                       <option key={type.value} value={type.value}>
-                        {type.icon} {type.label}
+                        {type.label}
                       </option>
                     ))}
                   </select>
@@ -415,9 +422,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                 </div>
 
                 <div className="pt-4 border-t border-purple-100">
-                  <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
-                    <span>🎯</span> Add-ons & Discounts
-                  </h3>
+                  <h3 className="text-sm font-medium text-gray-700 mb-3">Add-ons & Discounts</h3>
                   <div className="space-y-2.5">
                     <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg hover:bg-purple-50 transition-colors">
                       <input
@@ -427,7 +432,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                         className="mt-0.5 w-4 h-4 text-purple-600 border-purple-300 rounded focus:ring-purple-500"
                       />
                       <div className="flex-1">
-                        <span className="text-gray-800 text-sm font-medium">⚡ Rush Delivery</span>
+                        <span className="text-gray-800 text-sm font-medium">Rush Delivery</span>
                         <span className="block text-xs text-gray-500">+25% surcharge</span>
                       </div>
                     </label>
@@ -440,7 +445,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                         className="mt-0.5 w-4 h-4 text-purple-600 border-purple-300 rounded focus:ring-purple-500"
                       />
                       <div className="flex-1">
-                        <span className="text-gray-800 text-sm font-medium">🔄 3 Revisions</span>
+                        <span className="text-gray-800 text-sm font-medium">3 Revisions</span>
                         <span className="block text-xs text-gray-500">+$150 flat fee</span>
                       </div>
                     </label>
@@ -453,7 +458,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                         className="mt-0.5 w-4 h-4 text-purple-600 border-purple-300 rounded focus:ring-purple-500"
                       />
                       <div className="flex-1">
-                        <span className="text-gray-800 text-sm font-medium">📁 Source Files</span>
+                        <span className="text-gray-800 text-sm font-medium">Source Files</span>
                         <span className="block text-xs text-gray-500">+10% of base</span>
                       </div>
                     </label>
@@ -467,7 +472,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       />
                       <div className="flex-1">
                         <span className="text-gray-800 text-sm font-medium flex items-center gap-2">
-                          💝 Friends & Family
+                          Friends & Family
                           <span className="px-2 py-0.5 bg-pink-100 text-pink-700 text-xs rounded-full">15% OFF</span>
                         </span>
                         <span className="block text-xs text-gray-500">Special discount</span>
@@ -480,7 +485,9 @@ Note: This is a template contract. Please consult with a legal professional to e
 
             <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-xl p-6 text-white">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">💡</span>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
                 <h2 className="text-xl font-semibold">AI Rate Advisor</h2>
               </div>
               <p className="text-purple-100 text-sm mb-4">
@@ -502,7 +509,9 @@ Note: This is a template contract. Please consult with a legal professional to e
                     htmlFor="work-upload"
                     className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/30 rounded-xl cursor-pointer hover:bg-white/10 transition-all backdrop-blur"
                   >
-                    <span className="text-3xl mb-2">📸</span>
+                    <svg className="w-10 h-10 text-white/80 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                     <span className="text-sm text-white/90">Click to upload work sample</span>
                     <span className="text-xs text-white/70 mt-1">PNG, JPG up to 10MB</span>
                   </label>
@@ -540,7 +549,9 @@ Note: This is a template contract. Please consult with a legal professional to e
                       </>
                     ) : (
                       <>
-                        <span>✨</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
                         Analyze & Get Rate
                       </>
                     )}
@@ -556,7 +567,9 @@ Note: This is a template contract. Please consult with a legal professional to e
                 {aiSuggestion && (
                   <div className="p-4 bg-white/95 backdrop-blur rounded-xl space-y-3">
                     <div className="flex items-center gap-2 text-purple-700">
-                      <span className="text-lg">✅</span>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
                       <span className="font-semibold">Analysis Complete</span>
                     </div>
                     
@@ -591,8 +604,10 @@ Note: This is a template contract. Please consult with a legal professional to e
                       onClick={handleApplySuggestion}
                       className="w-full py-2.5 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center gap-2 shadow-lg"
                     >
-                      <span>🎯</span>
-                      Apply ${aiSuggestion.suggestedHourlyRate}/hr
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      Apply ${aiSuggestion.suggestedHourlyRate}/hr Rate
                     </button>
                   </div>
                 )}
@@ -609,15 +624,13 @@ Note: This is a template contract. Please consult with a legal professional to e
                 </p>
                 {friendsFamily && (
                   <p className="text-sm mt-2 bg-white/20 inline-block px-3 py-1 rounded-full">
-                    💝 Friends & Family discount applied
+                    Friends & Family discount applied
                   </p>
                 )}
               </div>
 
               <div className="space-y-3 mb-6">
-                <h3 className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <span>📊</span> Price Breakdown
-                </h3>
+                <h3 className="text-sm font-medium text-gray-700">Price Breakdown</h3>
                 <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Base ({estimatedHours} hrs × ${hourlyRate})</span>
@@ -625,25 +638,25 @@ Note: This is a template contract. Please consult with a legal professional to e
                   </div>
                   {calculations.rushFee > 0 && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">⚡ Rush Delivery (+25%)</span>
+                      <span className="text-gray-600">Rush Delivery (+25%)</span>
                       <span className="font-medium text-purple-600">+${calculations.rushFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.revisionFee > 0 && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">🔄 3 Revisions</span>
+                      <span className="text-gray-600">3 Revisions</span>
                       <span className="font-medium text-purple-600">+${calculations.revisionFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.sourceFileFee > 0 && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">📁 Source Files (+10%)</span>
+                      <span className="text-gray-600">Source Files (+10%)</span>
                       <span className="font-medium text-purple-600">+${calculations.sourceFileFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.friendsFamilyDiscount > 0 && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-pink-600">💝 Friends & Family (-15%)</span>
+                      <span className="text-pink-600">Friends & Family (-15%)</span>
                       <span className="font-medium text-pink-600">-${calculations.friendsFamilyDiscount.toFixed(2)}</span>
                     </div>
                   )}
@@ -665,7 +678,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  📧 Email Proposal
+                  Email Proposal
                 </button>
                 <button
                   onClick={() => setActiveTab('invoice')}
@@ -675,7 +688,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  🧾 Invoice
+                  Invoice
                 </button>
                 <button
                   onClick={() => setActiveTab('contract')}
@@ -685,7 +698,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  📄 Contract
+                  Contract
                 </button>
               </div>
 
@@ -707,12 +720,16 @@ Note: This is a template contract. Please consult with a legal professional to e
                     >
                       {copied === 'proposal' ? (
                         <>
-                          <span>✅</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
                           Copied!
                         </>
                       ) : (
                         <>
-                          <span>📋</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                          </svg>
                           Copy Proposal
                         </>
                       )}
@@ -755,12 +772,16 @@ Note: This is a template contract. Please consult with a legal professional to e
                     >
                       {copied === 'invoice' ? (
                         <>
-                          <span>✅</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
                           Copied!
                         </>
                       ) : (
                         <>
-                          <span>🧾</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
                           Copy Invoice
                         </>
                       )}
@@ -777,7 +798,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                     />
                     <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-3">
                       <p className="text-xs text-yellow-800">
-                        ⚠️ <strong>Legal Notice:</strong> This is a template contract for general use. Please consult with a legal professional to ensure it meets your specific needs and complies with local regulations.
+                        <strong>Legal Notice:</strong> This is a template contract for general use. Please consult with a legal professional to ensure it meets your specific needs and complies with local regulations.
                       </p>
                     </div>
                     <button
@@ -790,12 +811,16 @@ Note: This is a template contract. Please consult with a legal professional to e
                     >
                       {copied === 'contract' ? (
                         <>
-                          <span>✅</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
                           Copied!
                         </>
                       ) : (
                         <>
-                          <span>📄</span>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
                           Copy Contract
                         </>
                       )}
@@ -811,7 +836,7 @@ Note: This is a template contract. Please consult with a legal professional to e
       <footer className="mt-12 py-6 border-t border-purple-100 bg-white/50 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-gray-600">
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold">FreelanceSmart</span> - Price your work with confidence ✨
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold">FreelanceSmart</span> - Price your work with confidence
           </p>
         </div>
       </footer>
