@@ -34,6 +34,8 @@ app.post('/api/analyze-work', upload.single('image'), async (req, res) => {
     const mimeType = req.file.mimetype;
     const projectType = req.body.projectType || 'general creative work';
 
+    console.log('Sending request to OpenAI for', projectType);
+
     const response = await openai.chat.completions.create({
       model: "gpt-5",
       messages: [
@@ -74,20 +76,35 @@ Respond with JSON in this exact format:
       max_completion_tokens: 1024
     });
 
-    if (!response.choices || !response.choices[0] || !response.choices[0].message || !response.choices[0].message.content) {
-      throw new Error('Invalid response from AI service');
+    console.log('Received response from OpenAI');
+    console.log('Response structure:', JSON.stringify(response, null, 2));
+
+    if (!response || !response.choices || response.choices.length === 0) {
+      console.error('Invalid response structure:', response);
+      throw new Error('Invalid response from AI service - no choices returned');
     }
 
-    const content = response.choices[0].message.content.trim();
+    const message = response.choices[0].message;
+    if (!message || !message.content) {
+      console.error('Invalid message structure:', message);
+      throw new Error('Invalid response from AI service - no content in message');
+    }
+
+    const content = message.content.trim();
     if (!content) {
       throw new Error('AI returned an empty response');
     }
 
+    console.log('AI content:', content);
+
     const analysis = JSON.parse(content);
+    console.log('Parsed analysis:', analysis);
+    
     res.json(analysis);
 
   } catch (error) {
     console.error('Error analyzing image:', error);
+    console.error('Error stack:', error.stack);
     
     let errorMessage = 'Failed to analyze image';
     
