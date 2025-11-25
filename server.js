@@ -73,7 +73,7 @@ Respond with JSON in this exact format:
         }
       ],
       response_format: { type: "json_object" },
-      max_completion_tokens: 1024
+      max_completion_tokens: 2048
     });
 
     console.log('Received response from OpenAI');
