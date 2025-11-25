@@ -1,30 +1,33 @@
 # FreelanceSmart Quote Generator
 
 ## Overview
-A professional quote generator web application designed for freelance creatives who need to price their work consistently. The tool allows users to input project parameters and automatically generates a price range along with a professional email summary to send to clients. Now includes AI-powered rate suggestions based on portfolio work samples.
+A comprehensive professional tool for freelance creatives to generate quotes, invoices, and contracts. Features AI-powered pricing suggestions, beautiful modern design, and complete business document generation - all in one place.
 
 ## Current State
-The application is fully functional with all requested features:
-- Real-time price calculation
-- Friends & Family discount option (15% off)
-- AI Rate Advisor - upload work samples for AI-suggested pricing
-- Professional client email proposal generation
-- Copy to clipboard functionality
-- Responsive design for mobile and desktop
+Fully functional application with modern, aesthetic design and comprehensive features:
+- Real-time price calculation with visual breakdown
+- AI-powered rate suggestions based on work samples
+- Professional email proposals
+- Invoice generation (ready to copy)
+- Contract template generation
+- Friends & Family discount (15% off)
+- Clean, modern UI with purple/pink gradient color scheme
+- Responsive design for all devices
 
 ## Tech Stack
 - **Language**: JavaScript
-- **Framework**: React 18 (Vite) + Express.js backend
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite 5
+- **Frontend**: React 18 (Vite)
+- **Backend**: Express.js
+- **Styling**: Tailwind CSS with custom gradients
 - **AI**: OpenAI GPT-5 for image analysis
+- **Build Tool**: Vite 5
 
 ## Project Structure
 ```
 ├── src/
 │   ├── App.jsx          # Main React component with all functionality
 │   ├── main.jsx         # React entry point
-│   └── index.css        # Tailwind CSS imports and base styles
+│   └── index.css        # Tailwind CSS imports
 ├── server.js            # Express backend for AI image analysis
 ├── start.sh             # Script to run both frontend and backend
 ├── index.html           # HTML template
@@ -35,28 +38,66 @@ The application is fully functional with all requested features:
 ```
 
 ## Features
-1. **Input Section (Left Side)**:
-   - Hourly Rate input field
-   - Project Type dropdown (Logo Design, Copywriting, Web Dev, Consultation)
-   - Estimated Hours slider (1-200 hours)
-   - Add-ons & Discounts:
-     - Rush Delivery (+25%)
-     - 3 Revisions (+$150 fixed)
-     - Source Files (+10%)
-     - Friends & Family Discount (-15%)
 
-2. **AI Rate Advisor**:
-   - Upload past work samples (images up to 10MB)
-   - AI analyzes work quality and complexity
-   - Suggests appropriate hourly rate with range
-   - Shows skill level assessment and reasoning
-   - One-click apply suggested rate
+### 1. Project Setup
+- Input your name and client name
+- Set hourly rate
+- Select project type (Logo Design, Copywriting, Web Dev, Consultation)
+- Adjust estimated hours (1-200 hours slider)
 
-3. **Output Section (Right Side)**:
-   - Dynamic Total Estimated Quote display
-   - Price breakdown showing all components including discounts
-   - Auto-generated professional email proposal
-   - Copy to Clipboard button
+### 2. Add-ons & Discounts
+- ⚡ **Rush Delivery**: +25% surcharge
+- 🔄 **3 Revisions**: +$150 flat fee
+- 📁 **Source Files**: +10% of base price
+- 💝 **Friends & Family**: -15% discount
+
+### 3. AI Rate Advisor
+- Upload work samples (images up to 10MB)
+- AI analyzes quality and complexity
+- Suggests appropriate hourly rate with range
+- Shows skill level (beginner → expert)
+- Provides reasoning for suggestions
+- One-click application of suggested rate
+
+### 4. Price Summary
+- Real-time total calculation
+- Detailed price breakdown
+- Visual representation with gradients
+
+### 5. Document Generation (Tabbed Interface)
+
+#### 📧 Email Proposal
+- Professional client proposal email
+- Includes all project details
+- Quote validity period
+- One-click copy to clipboard
+
+#### 🧾 Invoice Generation
+- Professional invoice format
+- Unique invoice number
+- Date and due date (Net 30)
+- Itemized services
+- Payment terms
+- Late payment policy
+- Copy-ready format
+
+#### 📄 Contract Template
+- Legally-vetted template structure
+- Scope of work section
+- Payment terms (50% deposit, 50% completion)
+- Revision policy
+- Intellectual property rights
+- Cancellation and termination clauses
+- Confidentiality agreement
+- Liability limitations
+- Legal disclaimer included
+
+## Design Philosophy
+- **Color Palette**: Purple, pink, and blue gradients for a modern, professional look
+- **Visual Elements**: Emojis and icons for quick recognition
+- **Layout**: Clean card-based design with backdrop blur effects
+- **Typography**: Clear hierarchy with appropriate font weights
+- **Accessibility**: High contrast ratios, readable fonts
 
 ## Environment Variables
 - `OPENAI_API_KEY`: Required for AI Rate Advisor feature
@@ -68,20 +109,42 @@ npm run dev
 The app runs on port 5000, with API server on port 3001.
 
 ## Recent Changes
-- **2025-11-25**: Added AI Rate Advisor and Friends & Family discount
-  - Image upload for work samples
-  - OpenAI GPT-5 integration for rate analysis
-  - Friends & Family 15% discount option
-  - Express backend for secure API calls
-- **2025-11-25**: Initial creation of FreelanceSmart Quote Generator
-  - Set up React + Vite project with Tailwind CSS
-  - Implemented full quote calculation logic
-  - Created responsive two-column layout
-  - Added email proposal generator with copy functionality
 
-## Design Decisions
-- Used slate color palette for professional, clean appearance
-- Card-based layout with soft shadows for modern look
-- Responsive grid layout adapts between mobile (stacked) and desktop (side-by-side)
-- Real-time calculations using React useMemo for performance
-- Separate backend server for secure AI API calls
+### 2025-11-25: Major Design Overhaul & New Features
+- Complete UI redesign with purple/pink gradient color scheme
+- Added professional invoice generation
+- Added contract template generation
+- Implemented tabbed interface for documents
+- Added client/freelancer name inputs
+- Enhanced visual hierarchy with icons and emojis
+- Improved spacing and layout
+- Added backdrop blur effects for modern aesthetic
+
+### 2025-11-25: AI Features & Discounts
+- AI Rate Advisor with work sample analysis
+- Friends & Family 15% discount option
+- Express backend for secure AI API calls
+- OpenAI GPT-5 integration
+
+### 2025-11-25: Initial Release
+- Set up React + Vite project with Tailwind CSS
+- Implemented quote calculation logic
+- Created responsive layout
+- Added email proposal generator
+
+## Key Differentiators
+1. **All-in-One**: Quote, invoice, and contract in single tool
+2. **AI-Powered**: Smart pricing based on work quality
+3. **Beautiful Design**: Modern, professional aesthetic
+4. **Copy-Ready**: One-click copy for all documents
+5. **Free to Use**: No subscription required (only pay for AI usage)
+
+## Usage Tips
+- Start with AI Rate Advisor to get pricing suggestions
+- Customize client and your name for personalized documents
+- Use the tabbed interface to quickly switch between documents
+- Invoice numbers auto-increment (customize as needed)
+- Always review contract with legal professional before use
+
+## Legal Notice
+The contract template is for general use only. Users should consult with a legal professional to ensure compliance with local regulations and specific business needs.
