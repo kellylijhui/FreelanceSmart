@@ -64,7 +64,7 @@ function App() {
 
     const addonsText = addons.length > 0 ? `\n\nThis quote includes: ${addons.join(', ')}.` : ''
     
-    const aiRateText = aiSuggestion ? `\n\nRATE ANALYSIS:\nBased on our AI analysis of your portfolio work, we've determined an hourly rate of $${hourlyRate}/hr is appropriate. ${aiSuggestion.reasoning}` : ''
+    const aiRateText = aiSuggestion ? `\n\nRATE ANALYSIS:\nBased on our AI analysis of your portfolio work, we've determined an hourly rate of CAD $${hourlyRate}/hr is appropriate. ${aiSuggestion.reasoning}` : ''
 
     return `Dear ${clientName},
 
@@ -74,9 +74,9 @@ Based on our discussion, I'm pleased to provide the following quote:
 
 Project Type: ${projectTypeLabel}
 Estimated Hours: ${estimatedHours} hours
-Hourly Rate: $${hourlyRate.toFixed(2)}
+Hourly Rate: CAD $${hourlyRate.toFixed(2)}
 
-Total Estimated Quote: $${calculations.total.toFixed(2)}${addonsText}${aiRateText}
+Total Estimated Quote: CAD $${calculations.total.toFixed(2)}${addonsText}${aiRateText}
 
 This quote is valid for 30 days. Please don't hesitate to reach out if you have any questions or would like to discuss the project further.
 
@@ -89,7 +89,7 @@ ${yourName}`
   const generateInvoice = () => {
     const lineItems = []
     lineItems.push({
-      description: `${projectTypeLabel} - ${estimatedHours} hours @ $${hourlyRate}/hr`,
+      description: `${projectTypeLabel} - ${estimatedHours} hours @ CAD $${hourlyRate}/hr`,
       amount: calculations.basePrice
     })
     if (calculations.rushFee > 0) {
@@ -124,11 +124,11 @@ ${clientName}
 
 SERVICES PROVIDED
 
-${lineItems.map(item => `${item.description.padEnd(45)} $${item.amount.toFixed(2)}`).join('\n')}
+${lineItems.map(item => `${item.description.padEnd(45)} CAD $${item.amount.toFixed(2)}`).join('\n')}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-${'TOTAL DUE:'.padEnd(45)} $${calculations.total.toFixed(2)}
+${'TOTAL DUE:'.padEnd(45)} CAD $${calculations.total.toFixed(2)}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -178,17 +178,17 @@ The Service Provider agrees to perform the following services:
 
 3. PAYMENT TERMS
 
-• Total Project Fee: $${calculations.total.toFixed(2)}
+• Total Project Fee: CAD $${calculations.total.toFixed(2)}
 • Payment Schedule:
-  - 50% deposit ($${(calculations.total / 2).toFixed(2)}) due upon signing
-  - 50% balance ($${(calculations.total / 2).toFixed(2)}) due upon project completion
+  - 50% deposit (CAD $${(calculations.total / 2).toFixed(2)}) due upon signing
+  - 50% balance (CAD $${(calculations.total / 2).toFixed(2)}) due upon project completion
 • Late payments subject to 1.5% monthly interest
-• Additional work beyond scope will be billed at $${hourlyRate}/hour
+• Additional work beyond scope will be billed at CAD $${hourlyRate}/hour
 
 4. REVISIONS
 
 • ${includesRevisions ? 'Up to 3 rounds of revisions included' : 'Up to 2 rounds of minor revisions included'}
-• Additional revisions: $${(hourlyRate * 0.75).toFixed(2)}/hour
+• Additional revisions: CAD $${(hourlyRate * 0.75).toFixed(2)}/hour
 • Revisions must be requested within 14 days of delivery
 
 5. INTELLECTUAL PROPERTY
@@ -378,7 +378,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Hourly Rate ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Hourly Rate (CAD $)</label>
                   <input
                     type="number"
                     min="0"
@@ -446,7 +446,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       />
                       <div className="flex-1">
                         <span className="text-gray-800 text-sm font-medium">3 Revisions</span>
-                        <span className="block text-xs text-gray-500">+$150 flat fee</span>
+                        <span className="block text-xs text-gray-500">+CAD $150 flat fee</span>
                       </div>
                     </label>
 
@@ -576,12 +576,12 @@ Note: This is a template contract. Please consult with a legal professional to e
                     <div className="grid grid-cols-2 gap-2">
                       <div className="bg-purple-50 p-3 rounded-lg">
                         <p className="text-xs text-purple-600 mb-1">Suggested Rate</p>
-                        <p className="text-2xl font-bold text-purple-700">${aiSuggestion.suggestedHourlyRate}/hr</p>
+                        <p className="text-2xl font-bold text-purple-700">CAD ${aiSuggestion.suggestedHourlyRate}/hr</p>
                       </div>
                       <div className="bg-pink-50 p-3 rounded-lg">
                         <p className="text-xs text-pink-600 mb-1">Range</p>
                         <p className="text-lg font-semibold text-pink-700">
-                          ${aiSuggestion.rateRange?.min}-${aiSuggestion.rateRange?.max}
+                          CAD ${aiSuggestion.rateRange?.min}-${aiSuggestion.rateRange?.max}
                         </p>
                       </div>
                     </div>
@@ -607,7 +607,7 @@ Note: This is a template contract. Please consult with a legal professional to e
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      Apply ${aiSuggestion.suggestedHourlyRate}/hr Rate
+                      Apply CAD ${aiSuggestion.suggestedHourlyRate}/hr Rate
                     </button>
                   </div>
                 )}
@@ -620,7 +620,7 @@ Note: This is a template contract. Please consult with a legal professional to e
               <div className="text-center py-6 mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl text-white">
                 <p className="text-sm opacity-90 mb-2">Total Estimated Quote</p>
                 <p className="text-5xl font-bold">
-                  ${calculations.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  CAD ${calculations.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
                 {friendsFamily && (
                   <p className="text-sm mt-2 bg-white/20 inline-block px-3 py-1 rounded-full">
@@ -633,37 +633,37 @@ Note: This is a template contract. Please consult with a legal professional to e
                 <h3 className="text-sm font-medium text-gray-700">Price Breakdown</h3>
                 <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Base ({estimatedHours} hrs × ${hourlyRate})</span>
-                    <span className="font-medium text-gray-800">${calculations.basePrice.toFixed(2)}</span>
+                    <span className="text-gray-600">Base ({estimatedHours} hrs × CAD ${hourlyRate})</span>
+                    <span className="font-medium text-gray-800">CAD ${calculations.basePrice.toFixed(2)}</span>
                   </div>
                   {calculations.rushFee > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Rush Delivery (+25%)</span>
-                      <span className="font-medium text-purple-600">+${calculations.rushFee.toFixed(2)}</span>
+                      <span className="font-medium text-purple-600">+CAD ${calculations.rushFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.revisionFee > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">3 Revisions</span>
-                      <span className="font-medium text-purple-600">+${calculations.revisionFee.toFixed(2)}</span>
+                      <span className="font-medium text-purple-600">+CAD ${calculations.revisionFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.sourceFileFee > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Source Files (+10%)</span>
-                      <span className="font-medium text-purple-600">+${calculations.sourceFileFee.toFixed(2)}</span>
+                      <span className="font-medium text-purple-600">+CAD ${calculations.sourceFileFee.toFixed(2)}</span>
                     </div>
                   )}
                   {calculations.friendsFamilyDiscount > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-pink-600">Friends & Family (-15%)</span>
-                      <span className="font-medium text-pink-600">-${calculations.friendsFamilyDiscount.toFixed(2)}</span>
+                      <span className="font-medium text-pink-600">-CAD ${calculations.friendsFamilyDiscount.toFixed(2)}</span>
                     </div>
                   )}
                   <div className="border-t border-purple-200 pt-2 mt-2">
                     <div className="flex justify-between text-sm font-semibold">
                       <span className="text-gray-800">Total</span>
-                      <span className="text-purple-700">${calculations.total.toFixed(2)}</span>
+                      <span className="text-purple-700">CAD ${calculations.total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

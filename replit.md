@@ -1,7 +1,7 @@
 # FreelanceSmart Quote Generator
 
 ## Overview
-A comprehensive professional tool for freelance creatives to generate quotes, invoices, and contracts. Features AI-powered pricing suggestions, beautiful modern design, and complete business document generation - all in one place.
+A comprehensive professional tool for freelance creatives to generate quotes, invoices, and contracts. Features AI-powered pricing suggestions, beautiful modern design, and complete business document generation - all in one place. All pricing displayed in Canadian Dollars (CAD).
 
 ## Current State
 Fully functional application with modern, aesthetic design and comprehensive features:
@@ -109,6 +109,10 @@ npm run dev
 The app runs on port 5000, with API server on port 3001.
 
 ## Recent Changes
+
+### 2025-11-25: Currency Update
+- All pricing now displayed in Canadian Dollars (CAD)
+- Updated all currency references throughout the app (quotes, invoices, contracts)
 
 ### 2025-11-25: Major Design Overhaul & New Features
 - Complete UI redesign with purple/pink gradient color scheme
