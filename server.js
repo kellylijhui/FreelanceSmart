@@ -74,14 +74,33 @@ Respond with JSON in this exact format:
       max_completion_tokens: 1024
     });
 
-    const analysis = JSON.parse(response.choices[0].message.content);
+    if (!response.choices || !response.choices[0] || !response.choices[0].message || !response.choices[0].message.content) {
+      throw new Error('Invalid response from AI service');
+    }
+
+    const content = response.choices[0].message.content.trim();
+    if (!content) {
+      throw new Error('AI returned an empty response');
+    }
+
+    const analysis = JSON.parse(content);
     res.json(analysis);
 
   } catch (error) {
     console.error('Error analyzing image:', error);
+    
+    let errorMessage = 'Failed to analyze image';
+    
+    if (error.status === 429 || error.code === 'insufficient_quota') {
+      errorMessage = 'OpenAI quota exceeded. Please add credits to your OpenAI account at platform.openai.com';
+    } else if (error.status === 401) {
+      errorMessage = 'Invalid OpenAI API key. Please check your credentials.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
     res.status(500).json({ 
-      error: 'Failed to analyze image', 
-      details: error.message 
+      error: errorMessage
     });
   }
 });
